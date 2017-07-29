@@ -17,8 +17,7 @@
 			   "128": "maka128.png" 
           },
           "default_title": "#Pixa o Doria",      
-        },        
-  
+        },
   "background": {
     "scripts": ["setmakamenu.js"]
   },
