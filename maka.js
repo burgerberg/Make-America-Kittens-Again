@@ -12,46 +12,8 @@ if (makaTesting){
 
 // init blacklist
 
-var blacklist = ["trump", "трамп", "トランプ"]; // thanks to jSanchoDev and akiatoji for translations
+var blacklist = ["doria","dória"];
 
-// get additional settings from chrome storage
-
-chrome.storage.local.get({
-    blockPence: false,
-    blockFarage: false,
-    blockLePen: false,
-    blockWilders: false,
-    blockBannon: false,
-    customBlock: false
-  }, function(items) { 
-	  if (items.blockPence){
-		  blacklist.push("mike pence");
-		  blacklist.push("ペンス");
-	  };
-	  if (items.blockFarage){
-		  blacklist.push("farage");
-	  };
-	  if (items.blockLePen){
-		  blacklist.push("le pen");
-	  };
-	  if (items.blockWilders){
-		  blacklist.push("wilders");
-	  };
-	  if (items.blockBannon){
-		  blacklist.push("bannon");
-	  };
-	  // process custom blocklist
-	  
-	  if(items.customBlock){
-			var customBlockTargets = items.customBlock.split(',');
-			  customBlockTargets.forEach(function(blockTarget) {
-				    blacklist.push(blockTarget.trim().toLowerCase())
-			  });  
-	  };
-
-	  document.addEventListener('DOMContentLoaded', makanow(theKittens), false);
-	  
-  });
 
 // kitten data!
 // Note - now moved from S3 to local storage
