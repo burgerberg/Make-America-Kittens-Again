@@ -1,6 +1,6 @@
 // MENU PARA DESFAZER
 
-function DeMakaMenuClick(info, tab) {
+function cliqueUndoDORIAMenu(info, tab) {
     chrome.tabs.query({
         "active": true,
         "currentWindow": true
@@ -11,4 +11,4 @@ function DeMakaMenuClick(info, tab) {
     });
 }
 
-var setMAKAmenu1 = chrome.contextMenus.create({"title": "Trazer o Doriana de volta :(", "contexts":["page"], "onclick": DeMakaMenuClick});
+var setDoriaMenu = chrome.contextMenus.create({"title": "Trazer o Doriana de volta :(", "contexts":["page"], "onclick": cliqueUndoDORIAMenu});
