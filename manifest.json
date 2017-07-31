@@ -19,13 +19,13 @@
           "default_title": "#Pixa o Doria"      
         },
   "background": {
-    "scripts": ["setmakamenu.js"]
+    "scripts": ["pixodoriamenu.js"]
   },
           
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["maka.js"]
+      "js": ["pixodoria.js"]
     }
   ],
   "web_accessible_resources": [
