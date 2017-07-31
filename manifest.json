@@ -29,6 +29,6 @@
     }
   ],
   "web_accessible_resources": [
-    "kittens/*.jpg"
+    "pixos/*.jpg"
   ]
 }
