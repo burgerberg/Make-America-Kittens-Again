@@ -9,12 +9,12 @@
     "storage",
     "contextMenus"
   ],
-  "icons": { "48": "maka48.png",
-          "128": "maka128.png" },
+  "icons": { "48": "pixodoria48.png",
+          "128": "pixodoria128.png" },
   "browser_action": {
           "default_icon": { 
-	           "48": "maka48.png",
-			   "128": "maka128.png" 
+	           "48": "pixodoria48.png",
+			   "128": "pixodoria128.png" 
           },
           "default_title": "#Pixa o Doria"      
         },
