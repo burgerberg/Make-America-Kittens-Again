@@ -1,25 +1,19 @@
-// maka.js - part of make america kittens again
-// v1.2.1
-// by Tom Royal 
-// tomroyal.com
+//Adaptado de 'Make America Kittens Again', de Tom Royal
 
-var makaTesting = false; // for debugging only
+var doriaTeste = false;
 
-if (makaTesting){
-	console.log('maka initiated');
-	var makaReplacements = 0;
+if (doriaTeste){
+	console.log('doria initiated');
+	var doriaReplacements = 0;
 }	
 
-// init blacklist
 
 var blacklist = ["doria","dória"];
 
 
-// kitten data!
-// Note - now moved from S3 to local storage
+// pixos
 
-
-var theKittens = {"kitten": [
+var osPixos = {"pixo": [
     {"file": "1.jpg", "Credit": "Crsan", "URL": "http://www.flickr.com/photos/crsan/2571204498/", "type":"0"},
 	{"file": "2.jpg", "Credit": "Abcrumley", "URL": "http://www.flickr.com/photos/crumley/160490011/", "type":"0"},
 	{"file": "3.jpg", "Credit": "Woodchild2010", "URL": "http://www.flickr.com/photos/woodchild/5335939044/", "type":"0"},
@@ -56,30 +50,26 @@ var theKittens = {"kitten": [
     ]
 };
 
-function makanow(theKittens){
-	if (makaTesting){
-		console.log('maka processing blacklist is '+blacklist);
+function dorianow(osPixos){
+	if (doriaTeste){
+		console.log('doria processing blacklist is '+blacklist);
 	}
 
-	// called on page load. Searches all img alt text and srcs for the strings in blacklist, replaces with kittens
+
 	var pagepics=document.getElementsByTagName("img"), i=0, img;	
 	while (img = pagepics[i++])
 	{	
 		
-		if (img.hasAttribute('makareplaced')){
-			// already replaced	
+		if (img.hasAttribute('doriareplaced')){
 		}
 		else {
-			// not yet replaced
 			var alttext = String(img.alt).toLowerCase();
 			var imgsrc = String(img.src).toLowerCase();
 			
 			if (img.parentElement.nodeName != 'BODY'){
-				// check parent innerHTML for blackilist
 				var parenttag = img.parentElement.innerHTML.toLowerCase();
 			}
 			else {
-				// prevent parse of entire doc
 				var parenttag = '';
 			};
 			
@@ -89,14 +79,12 @@ function makanow(theKittens){
 			blacklist.forEach(function(blist) {	
 				if ((alttext.indexOf(blist) != -1) || (imgsrc.indexOf(blist) != -1) || (parenttag.indexOf(blist) != -1)){
 					
-					// append old src
-					img.setAttribute("makareplaced", img.src);
+					img.setAttribute("doriareplaced", img.src);
 					
-					// remove srcsets, forcing browser to the kitten - eg, BBC News
 					if (img.hasAttribute('srcset')){
 						img.removeAttribute('srcset');	
 					};
-					// remove source srcsets if children of same parent <picture> element - eg, the Guardian
+
 					if (img.parentElement.nodeName == 'PICTURE'){
 						var theparent = img.parentNode;
 						for(var child=theparent.firstChild; child!==null; child=child.nextSibling) {
@@ -107,7 +95,6 @@ function makanow(theKittens){
 						};
 						
 					};
-					// knock out lazyloader data URLs so it doesn't overwrite kittens
 					if (img.hasAttribute('data-src')){
 						img.removeAttribute('data-src');	
 					};
@@ -120,54 +107,51 @@ function makanow(theKittens){
 					
 					var randk = Math.floor(Math.random() * 32) + 1
 					
-					img.src = chrome.runtime.getURL('/kittens/'+theKittens.kitten[randk].file+'');
+					img.src = chrome.runtime.getURL('/pixos/'+osPixos.pixo[randk].file+'');
 					
 					img.width = imgwidth;
 					img.height = imgheight;
 					
-					if (theKittens.kitten[randk].type == 0){
-						img.alt = 'Photo by '+theKittens.kitten[randk].Credit+' source '+theKittens.kitten[randk].URL+'';
+					if (osPixos.pixo[randk].type == 0){
+						img.alt = 'Photo by '+osPixos.pixo[randk].Credit+' source '+osPixos.pixo[randk].URL+'';
 					}
 					else {
-						img.alt = 'Photo by '+theKittens.kitten[randk].Credit+'';
+						img.alt = 'Photo by '+osPixos.pixo[randk].Credit+'';
 					};
-					makaReplacements++;
+					doriaReplacements++;
 				};
 			});	
 		};				
 	}
-	if (makaTesting){
-		console.log('maka processing complete, replaced '+makaReplacements+' images');
+	if (doriaTeste){
+		console.log('doria processing complete, replaced '+doriaReplacements+' images');
 	}	    
 };
 
-// function to replace kittened-images with the original SRCs
 
-function undomakanow(){
-	if (makaTesting){
-		console.log('undoing MAKA');
+function undodoriaagora(){
+	if (doriaTeste){
+		console.log('undoing DORIA');
 	}
 
 	var pagepics=document.getElementsByTagName("img"), i=0, img;	
 	while (img = pagepics[i++])
 	{	
-		if (img.hasAttribute('makareplaced')){
-			if (makaTesting){
+		if (img.hasAttribute('doriareplaced')){
+			if (doriaTeste){
 				console.log('replacing image');
 			};
-			img.src = img.getAttribute('makareplaced');
-			img.removeAttribute('makareplaced');
+			img.src = img.getAttribute('doriareplaced');
+			img.removeAttribute('doriareplaced');
 		};	
 	};
 	
 }
 
-// listener for context menu click invoking the above
 
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.functiontoInvoke == "undoDORIA") {
-	    // undo function called
-        undomakanow();
+        undodoriaagora();
     };
    
 });
