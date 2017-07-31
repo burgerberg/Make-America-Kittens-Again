@@ -165,13 +165,9 @@ function undomakanow(){
 // listener for context menu click invoking the above
 
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
-    if (message.functiontoInvoke == "undoMAKA") {
+    if (message.functiontoInvoke == "undoDORIA") {
 	    // undo function called
         undomakanow();
     };
-    /*
-    else if (message.functiontoInvoke == "redoMAKA") {
-        makanow(theKittens);
-    }
-    */
+   
 });
